@@ -14,7 +14,7 @@
     <GROUP id="{80F93183-FFB8-E59B-C04C-BC4432A8B5D6}" name="Source">
       <FILE id="EoOB5I" name="FilterGraph.cpp" compile="1" resource="0" file="Source/FilterGraph.cpp"/>
       <FILE id="OiGQ3f" name="FilterGraph.h" compile="0" resource="0" file="Source/FilterGraph.h"/>
-      <FILE id="eSHlc3" name="FilterIOConfiguration.cpp" compile="0" resource="0"
+      <FILE id="eSHlc3" name="FilterIOConfiguration.cpp" compile="1" resource="0"
             file="Source/FilterIOConfiguration.cpp"/>
       <FILE id="ZQFcUW" name="FilterIOConfiguration.h" compile="0" resource="0"
             file="Source/FilterIOConfiguration.h"/>

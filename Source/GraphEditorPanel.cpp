@@ -27,7 +27,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "GraphEditorPanel.h"
 #include "InternalFilters.h"
-//#include "FilterIOConfiguration.h"
+#include "PluginEditor.h"
+#include "FilterIOConfiguration.h"
 
 
 //==============================================================================
@@ -843,19 +844,19 @@ void GraphEditorPanel::paint (Graphics& g)
 
 void GraphEditorPanel::mouseDown (const MouseEvent& e)
 {
-    if (e.mods.isPopupMenu())
-    {
-        PopupMenu m;
+	if (e.mods.isPopupMenu())
+	{
+		PopupMenu m;
 
-        //if (MainHostWindow* const mainWindow = findParentComponentOfClass<MainHostWindow>())
-        //{
-        //    mainWindow->addPluginsToMenu (m);
+		if (VstrackAudioProcessorEditor* const mainWindow = findParentComponentOfClass<VstrackAudioProcessorEditor>())
+		{
+			mainWindow->addPluginsToMenu(m);
 
-        //    const int r = m.show();
+			const int r = m.show();
 
-        //    createNewPlugin (mainWindow->getChosenType (r), e.x, e.y);
-        //}
-    }
+			createNewPlugin(mainWindow->getChosenType(r), e.x, e.y);
+		}
+	}
 }
 
 void GraphEditorPanel::createNewPlugin (const PluginDescription* desc, int x, int y)

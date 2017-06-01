@@ -27,6 +27,7 @@
 #pragma once
 
 #include "FilterGraph.h"
+#include "PluginEditor.h"
 
 class FilterIOConfigurationWindow       : public  AudioProcessorEditor
 {
@@ -47,7 +48,7 @@ public:
 private:
 
     //==============================================================================
-    //MainHostWindow* getMainWindow() const;
+	VstrackAudioProcessorEditor* getMainWindow() const;
     GraphDocumentComponent* getGraphEditor() const;
     AudioProcessorGraph* getGraph() const;
     int32 getNodeId() const;

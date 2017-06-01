@@ -524,12 +524,12 @@ int32 FilterIOConfigurationWindow::getNodeId() const
     return -1;
 }
 
-MainHostWindow* FilterIOConfigurationWindow::getMainWindow() const
+VstrackAudioProcessorEditor* FilterIOConfigurationWindow::getMainWindow() const
 {
     Component* comp;
 
     for (int idx = 0; (comp = Desktop::getInstance().getComponent(idx)) != nullptr; ++idx)
-        if (MainHostWindow* mainWindow = dynamic_cast<MainHostWindow*> (comp))
+        if (VstrackAudioProcessorEditor* mainWindow = dynamic_cast<VstrackAudioProcessorEditor*> (comp))
             return mainWindow;
 
     return nullptr;
@@ -537,7 +537,7 @@ MainHostWindow* FilterIOConfigurationWindow::getMainWindow() const
 
 GraphDocumentComponent* FilterIOConfigurationWindow::getGraphEditor() const
 {
-    if (MainHostWindow* mainWindow = getMainWindow())
+    if (VstrackAudioProcessorEditor* mainWindow = getMainWindow())
     {
         if (GraphDocumentComponent* graphEditor = mainWindow->getGraphEditor())
             return graphEditor;
