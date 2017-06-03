@@ -8,30 +8,16 @@
   ==============================================================================
 */
 
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "GraphEditorPanel.h"
 #include "InternalFilters.h"
 
-
 //==============================================================================
 VstrackAudioProcessorEditor::VstrackAudioProcessorEditor (VstrackAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (800, 600);
-
-	graphDocumentComponent = new GraphDocumentComponent(formatManager, &deviceManager);
-	graphDocumentComponent->setBounds(0, 0, getWidth(), getHeight());
-	addAndMakeVisible(graphDocumentComponent);
-
-	menuBar = new MenuBar(this);
-	menuBar->setBounds(0, 0, getWidth(), getLookAndFeel().getDefaultMenuBarHeight());
-	addAndMakeVisible(menuBar);// menu bar
-
-
-
 	PropertiesFile::Options options;
 	options.applicationName = "Juce Audio Plugin Host";
 	options.filenameSuffix = "settings";
@@ -39,9 +25,7 @@ VstrackAudioProcessorEditor::VstrackAudioProcessorEditor (VstrackAudioProcessor&
 
 	appProperties = new ApplicationProperties();
 	appProperties->setStorageParameters(options);
-
-	commandManager.registerAllCommandsForTarget(this);
-
+	
 	formatManager.addDefaultFormats();
 	formatManager.addFormat(new InternalPluginFormat());
 
@@ -49,6 +33,14 @@ VstrackAudioProcessorEditor::VstrackAudioProcessorEditor (VstrackAudioProcessor&
 		->getXmlValue("audioDeviceState"));
 
 	deviceManager.initialise(256, 256, savedAudioState, true);
+
+    // Make sure that before the constructor has finished, you've set the
+    // editor's size to whatever you need it to be.
+    setSize (800, 600);
+
+	graphDocumentComponent = new GraphDocumentComponent(formatManager, &deviceManager);
+	graphDocumentComponent->setBounds(0, 0, getWidth(), getHeight());
+	addAndMakeVisible(graphDocumentComponent);
 
 	InternalPluginFormat internalFormat;
 	internalFormat.getAllTypes(internalTypes);
@@ -66,6 +58,16 @@ VstrackAudioProcessorEditor::VstrackAudioProcessorEditor (VstrackAudioProcessor&
 	if (auto* filterGraph = getGraphEditor()->graph.get())
 		filterGraph->addChangeListener(this);
 
+	commandManager.registerAllCommandsForTarget(this);
+
+	addKeyListener(commandManager.getKeyMappings());
+
+	menuBar = new MenuBar(this);
+	menuBar->setBounds(0, 0, getWidth(), getLookAndFeel().getDefaultMenuBarHeight());
+	addAndMakeVisible(menuBar);// menu bar
+	menuBar->menuItemsChanged();
+
+	commandManager.setFirstCommandTarget(this);
 }
 
 VstrackAudioProcessorEditor::~VstrackAudioProcessorEditor()
@@ -79,6 +81,9 @@ VstrackAudioProcessorEditor::~VstrackAudioProcessorEditor()
 	pluginListWindow = nullptr;
 	graphDocumentComponent = nullptr;
 	menuBar = nullptr;
+
+	//appProperties->getUserSettings()->setValue("mainWindowPos", getWindowStateAsString());
+
 }
 
 //==============================================================================

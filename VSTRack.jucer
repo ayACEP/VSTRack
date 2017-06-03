@@ -3,13 +3,13 @@
 <JUCERPROJECT id="uiv2z8" name="VSTRack" displaySplashScreen="1" reportAppUsage="1"
               splashScreenColour="Dark" projectType="audioplug" version="0.0.1"
               bundleIdentifier="org.ls.VSTRack" includeBinaryInAppConfig="1"
-              buildVST="0" buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0"
+              buildVST="0" buildVST3="1" buildAU="0" buildAUv3="0" buildRTAS="0"
               buildAAX="0" buildStandalone="1" enableIAA="0" pluginName="VSTRack"
               pluginDesc="VSTRack" pluginManufacturer="ayACEP" pluginManufacturerCode="Manu"
               pluginCode="Uiv2" pluginChannelConfigs="" pluginIsSynth="0" pluginWantsMidiIn="0"
               pluginProducesMidiOut="0" pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="VSTRackAU" pluginRTASCategory="" aaxIdentifier="org.ls.VSTRack"
-              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.0.1">
+              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.0.2">
   <MAINGROUP id="aPj2Vx" name="VSTRack">
     <GROUP id="{80F93183-FFB8-E59B-C04C-BC4432A8B5D6}" name="Source">
       <FILE id="EoOB5I" name="FilterGraph.cpp" compile="1" resource="0" file="Source/FilterGraph.cpp"/>
@@ -36,11 +36,12 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <VS2017 targetFolder="Builds/VisualStudio2017" windowsTargetPlatformVersion="10.0.14393.0">
+    <VS2017 targetFolder="Builds/VisualStudio2017" windowsTargetPlatformVersion="10.0.14393.0"
+            vst3Folder="">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="VSTRack"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="0" optimisation="3" targetName="VSTRack"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

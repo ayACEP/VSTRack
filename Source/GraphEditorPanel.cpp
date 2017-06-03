@@ -182,8 +182,8 @@ PluginWindow* PluginWindow::getWindowFor (AudioProcessorGraph::Node* const node,
             ui = new GenericAudioProcessorEditor (processor);
         else if (type == Programs)
             ui = new ProgramAudioProcessorEditor (processor);
-        //else if (type == AudioIO)
-            //ui = new FilterIOConfigurationWindow (processor);
+        else if (type == AudioIO)
+            ui = new FilterIOConfigurationWindow (processor);
     }
 
     if (ui != nullptr)

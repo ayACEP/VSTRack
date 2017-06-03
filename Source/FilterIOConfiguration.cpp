@@ -202,7 +202,7 @@ public:
 
     void paint (Graphics& g) override
     {
-        g.fillAll (Colours::white);
+        g.fillAll (getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
     }
 
     void resized() override
@@ -479,7 +479,7 @@ FilterIOConfigurationWindow::~FilterIOConfigurationWindow()
 
 void FilterIOConfigurationWindow::paint (Graphics& g)
 {
-     g.fillAll (Colours::white);
+     g.fillAll (getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
 }
 
 void FilterIOConfigurationWindow::resized()

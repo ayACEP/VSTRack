@@ -46,6 +46,11 @@ InternalPluginFormat::InternalPluginFormat()
         AudioProcessorGraph::AudioGraphIOProcessor p (AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
         p.fillInPluginDescription (midiInDesc);
     }
+
+	insertInDesc.name = "Insert Input";
+
+	insertOutputDesc.name = "Insert Output";
+
 }
 
 void InternalPluginFormat::createPluginInstance (const PluginDescription& desc,
@@ -79,6 +84,8 @@ const PluginDescription* InternalPluginFormat::getDescriptionFor (const Internal
         case audioInputFilter:      return &audioInDesc;
         case audioOutputFilter:     return &audioOutDesc;
         case midiInputFilter:       return &midiInDesc;
+		case insertInputFilter:		return &insertInDesc;
+		case insertOutputFilter:	return &insertOutputDesc;
         default:                    break;
     }
 
