@@ -40,7 +40,7 @@ class FilterGraph   : public FileBasedDocument, public AudioProcessorListener
 {
 public:
     //==============================================================================
-    FilterGraph (AudioPluginFormatManager& formatManager);
+    FilterGraph (AudioPluginFormatManager& formatManager, AudioProcessorGraph& g);
     ~FilterGraph();
 
     //==============================================================================
@@ -111,7 +111,7 @@ public:
 private:
     //==============================================================================
     AudioPluginFormatManager& formatManager;
-    AudioProcessorGraph graph;
+    AudioProcessorGraph& graph;
 
     uint32 lastUID;
     uint32 getNextUID() noexcept;

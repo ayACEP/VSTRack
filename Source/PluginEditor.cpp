@@ -38,7 +38,7 @@ VstrackAudioProcessorEditor::VstrackAudioProcessorEditor (VstrackAudioProcessor&
     // editor's size to whatever you need it to be.
     setSize (800, 600);
 
-	graphDocumentComponent = new GraphDocumentComponent(formatManager, &deviceManager);
+	graphDocumentComponent = new GraphDocumentComponent(formatManager, &deviceManager, p.getGraph());
 	graphDocumentComponent->setBounds(0, 0, getWidth(), getHeight());
 	addAndMakeVisible(graphDocumentComponent);
 
@@ -101,7 +101,7 @@ void VstrackAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
-	midiVolume.setBounds(40, 30, 20, getHeight() - 60);
+	//midiVolume.setBounds(40, 30, 20, getHeight() - 60);
 }
 
 StringArray MenuBar::getMenuBarNames()

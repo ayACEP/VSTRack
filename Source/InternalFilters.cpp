@@ -47,9 +47,19 @@ InternalPluginFormat::InternalPluginFormat()
         p.fillInPluginDescription (midiInDesc);
     }
 
-	insertInDesc.name = "Insert Input";
+    {
+        AudioProcessorGraph::AudioGraphIOProcessor p(AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
+        p.fillInPluginDescription(insertInDesc);
+        insertInDesc.name = "Insert Input";
+        insertInDesc.category = "";
+    }
 
-	insertOutputDesc.name = "Insert Output";
+    {
+        AudioProcessorGraph::AudioGraphIOProcessor p(AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
+        p.fillInPluginDescription(insertOutputDesc);
+        insertOutputDesc.name = "Insert Output";
+        insertOutputDesc.category = "";
+    }
 
 }
 
@@ -68,6 +78,12 @@ void InternalPluginFormat::createPluginInstance (const PluginDescription& desc,
 
     if (desc.name == midiInDesc.name)
         retval = new AudioProcessorGraph::AudioGraphIOProcessor (AudioProcessorGraph::AudioGraphIOProcessor::midiInputNode);
+
+    if (desc.name == insertInDesc.name)
+        retval = new AudioProcessorGraph::AudioGraphIOProcessor(AudioProcessorGraph::AudioGraphIOProcessor::audioInputNode);
+
+    if (desc.name == insertOutputDesc.name)
+        retval = new AudioProcessorGraph::AudioGraphIOProcessor(AudioProcessorGraph::AudioGraphIOProcessor::audioOutputNode);
 
     callback (userData, retval, retval == nullptr ? NEEDS_TRANS ("Invalid internal filter name") : String());
 }

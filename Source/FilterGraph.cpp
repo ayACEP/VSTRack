@@ -33,18 +33,20 @@
 //==============================================================================
 const int FilterGraph::midiChannelNumber = 0x1000;
 
-FilterGraph::FilterGraph (AudioPluginFormatManager& formatManager_)
+FilterGraph::FilterGraph (AudioPluginFormatManager& formatManager_, AudioProcessorGraph& g)
     : FileBasedDocument (filenameSuffix,
                          filenameWildcard,
                          "Load a filter graph",
                          "Save a filter graph"),
-      formatManager (formatManager_), lastUID (0)
+    formatManager (formatManager_), 
+    lastUID (0),
+    graph(g)
 {
     InternalPluginFormat internalFormat;
 
- //   addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioInputFilter),  0.5f,  0.1f);
- //   addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::midiInputFilter),   0.25f, 0.1f);
- //   addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioOutputFilter), 0.5f,  0.9f);
+    //addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioInputFilter),  0.5f,  0.1f);
+    addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::midiInputFilter),   0.25f, 0.1f);
+    //addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioOutputFilter), 0.5f,  0.9f);
 	//addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::insertInputFilter), 0.75f, 0.1f);
 	//addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::insertOutputFilter), 0.75f, 0.9f);
 

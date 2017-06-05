@@ -25,6 +25,7 @@ VstrackAudioProcessor::VstrackAudioProcessor()
                        )
 #endif
 {
+	
 }
 
 VstrackAudioProcessor::~VstrackAudioProcessor()
@@ -136,14 +137,21 @@ void VstrackAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer&
     for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    
+	graph.processBlock(buffer, midiMessages);
+    //for (int i = 0; i < graph.getNumNodes(); i++) {
+    //    auto processor = graph.getNode(i)->getProcessor();
+    //    processor->processBlock(buffer, midiMessages);
+    //}
+
+
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        float* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
+  //  for (int channel = 0; channel < totalNumInputChannels; ++channel)
+  //  {
+  //      const float* inData = buffer.getReadPointer(channel);
+  //      float* outData = buffer.getWritePointer (channel);
+  //  }
 }
 
 //==============================================================================
@@ -169,6 +177,11 @@ void VstrackAudioProcessor::setStateInformation (const void* data, int sizeInByt
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+AudioProcessorGraph & VstrackAudioProcessor::getGraph()
+{
+	return graph;
 }
 
 //==============================================================================

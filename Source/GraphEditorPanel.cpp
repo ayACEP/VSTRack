@@ -1114,8 +1114,9 @@ private:
 
 //==============================================================================
 GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& formatManager,
-                                                AudioDeviceManager* deviceManager_)
-    : graph (new FilterGraph (formatManager)), deviceManager (deviceManager_),
+                                                AudioDeviceManager* deviceManager_, 
+                                                AudioProcessorGraph& g)
+    : graph (new FilterGraph (formatManager, g)), deviceManager (deviceManager_),
       graphPlayer (/*getAppProperties().getUserSettings()->getBoolValue ("doublePrecisionProcessing", false)*/)
 {
     addAndMakeVisible (graphPanel = new GraphEditorPanel (*graph));
@@ -1126,8 +1127,8 @@ GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& format
 
     keyState.addListener (&graphPlayer.getMidiMessageCollector());
 
-    addAndMakeVisible (keyboardComp = new MidiKeyboardComponent (keyState,
-                                                                 MidiKeyboardComponent::horizontalKeyboard));
+    //addAndMakeVisible (keyboardComp = new MidiKeyboardComponent (keyState,
+    //                                                             MidiKeyboardComponent::horizontalKeyboard));
 
     addAndMakeVisible (statusBar = new TooltipBar());
 
@@ -1151,7 +1152,7 @@ void GraphDocumentComponent::resized()
 
     graphPanel->setBounds (0, 0, getWidth(), getHeight() - keysHeight);
     statusBar->setBounds (0, getHeight() - keysHeight - statusHeight, getWidth(), statusHeight);
-    keyboardComp->setBounds (0, getHeight() - keysHeight, getWidth(), keysHeight);
+    //keyboardComp->setBounds (0, getHeight() - keysHeight, getWidth(), keysHeight);
 }
 
 void GraphDocumentComponent::createNewPlugin (const PluginDescription* desc, int x, int y)
@@ -1161,7 +1162,7 @@ void GraphDocumentComponent::createNewPlugin (const PluginDescription* desc, int
 
 void GraphDocumentComponent::unfocusKeyboardComponent()
 {
-    keyboardComp->unfocusAllComponents();
+    //keyboardComp->unfocusAllComponents();
 }
 
 void GraphDocumentComponent::releaseGraph()
