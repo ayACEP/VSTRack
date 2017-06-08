@@ -45,8 +45,8 @@ FilterGraph::FilterGraph (AudioPluginFormatManager& formatManager_, AudioProcess
     InternalPluginFormat internalFormat;
 
     //addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioInputFilter),  0.5f,  0.1f);
-    addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::midiInputFilter),   0.25f, 0.1f);
-    //addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioOutputFilter), 0.5f,  0.9f);
+    //addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::midiInputFilter),   0.25f, 0.1f);
+    addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::audioOutputFilter), 0.5f,  0.9f);
 	//addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::insertInputFilter), 0.75f, 0.1f);
 	//addFilter (internalFormat.getDescriptionFor (InternalPluginFormat::insertOutputFilter), 0.75f, 0.9f);
 
@@ -58,6 +58,10 @@ FilterGraph::FilterGraph (AudioPluginFormatManager& formatManager_, AudioProcess
 FilterGraph::~FilterGraph()
 {
     graph.addListener (this);
+    for (int i = 0; i < graph.getNumNodes(); i++) {
+        auto node = graph.getNode(i);
+        node->getProcessor()->releaseResources();
+    }
     graph.clear();
 }
 

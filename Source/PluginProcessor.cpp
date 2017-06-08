@@ -25,12 +25,10 @@ VstrackAudioProcessor::VstrackAudioProcessor()
                        )
 #endif
 {
-	
 }
 
 VstrackAudioProcessor::~VstrackAudioProcessor()
 {
-	
 }
 
 //==============================================================================
@@ -137,21 +135,29 @@ void VstrackAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer&
     for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    
-	graph.processBlock(buffer, midiMessages);
-    //for (int i = 0; i < graph.getNumNodes(); i++) {
-    //    auto processor = graph.getNode(i)->getProcessor();
-    //    processor->processBlock(buffer, midiMessages);
-    //}
+
+
+	//graph.processBlock(buffer, midiMessages);
+    for (int i = 0; i < graph.getNumNodes(); i++) {
+        auto processor = graph.getNode(i)->getProcessor();
+        processor->processBlock(buffer, midiMessages);
+        //for (int channel = 0; channel < totalNumInputChannels; ++channel) {
+        //    float* inData = const_cast<float*>(buffer.getReadPointer(channel));
+        //    float* outData = buffer.getWritePointer (channel);
+        //    for (int j = 0; j < buffer.getNumSamples(); i++) {
+        //        //inData[j] = outData[j];
+        //    }
+        //}
+    }
 
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
-  //  for (int channel = 0; channel < totalNumInputChannels; ++channel)
-  //  {
-  //      const float* inData = buffer.getReadPointer(channel);
-  //      float* outData = buffer.getWritePointer (channel);
-  //  }
+    //for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    //{
+    //    const float* inData = buffer.getReadPointer(channel);
+    //    float* outData = buffer.getWritePointer (channel);
+    //}
 }
 
 //==============================================================================

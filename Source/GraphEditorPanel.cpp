@@ -1130,10 +1130,10 @@ GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& format
     //addAndMakeVisible (keyboardComp = new MidiKeyboardComponent (keyState,
     //                                                             MidiKeyboardComponent::horizontalKeyboard));
 
-    addAndMakeVisible (statusBar = new TooltipBar());
+    //addAndMakeVisible (statusBar = new TooltipBar());
 
-    deviceManager->addAudioCallback (&graphPlayer);
-    deviceManager->addMidiInputCallback (String(), &graphPlayer.getMidiMessageCollector());
+    //deviceManager->addAudioCallback (&graphPlayer);
+    //deviceManager->addMidiInputCallback (String(), &graphPlayer.getMidiMessageCollector());
 
     graphPanel->updateComponents();
 }
@@ -1150,8 +1150,8 @@ void GraphDocumentComponent::resized()
     const int keysHeight = 60;
     const int statusHeight = 20;
 
-    graphPanel->setBounds (0, 0, getWidth(), getHeight() - keysHeight);
-    statusBar->setBounds (0, getHeight() - keysHeight - statusHeight, getWidth(), statusHeight);
+    graphPanel->setBounds (0, 0, getWidth(), getHeight()/* - keysHeight*/);
+    //statusBar->setBounds (0, getHeight() - keysHeight - statusHeight, getWidth(), statusHeight);
     //keyboardComp->setBounds (0, getHeight() - keysHeight, getWidth(), keysHeight);
 }
 
@@ -1167,9 +1167,9 @@ void GraphDocumentComponent::unfocusKeyboardComponent()
 
 void GraphDocumentComponent::releaseGraph()
 {
-    deviceManager->removeAudioCallback (&graphPlayer);
-    deviceManager->removeMidiInputCallback (String(), &graphPlayer.getMidiMessageCollector());
-    deviceManager->removeChangeListener (graphPanel);
+    //deviceManager->removeAudioCallback (&graphPlayer);
+    //deviceManager->removeMidiInputCallback (String(), &graphPlayer.getMidiMessageCollector());
+    //deviceManager->removeChangeListener (graphPanel);
 
     deleteAllChildren();
 
