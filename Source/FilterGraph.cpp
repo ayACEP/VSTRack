@@ -57,7 +57,7 @@ FilterGraph::FilterGraph (AudioPluginFormatManager& formatManager_, AudioProcess
 
 FilterGraph::~FilterGraph()
 {
-    graph.addListener (this);
+    graph.removeListener (this);
     for (int i = 0; i < graph.getNumNodes(); i++) {
         auto node = graph.getNode(i);
         node->getProcessor()->releaseResources();

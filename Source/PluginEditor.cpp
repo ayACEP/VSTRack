@@ -245,14 +245,14 @@ void VstrackAudioProcessorEditor::changeListenerCallback(ChangeBroadcaster* chan
 	}
 	else if (changed == getGraphEditor()->graph)
 	{
-		String title = JUCEApplication::getInstance()->getApplicationName();
+		//String title = JUCEApplication::getInstance()->getApplicationName();
 
-		File f = getGraphEditor()->graph->getFile();
+		//File f = getGraphEditor()->graph->getFile();
 
-		if (f.existsAsFile())
-			title = f.getFileName() + " - " + title;
+		//if (f.existsAsFile())
+		//	title = f.getFileName() + " - " + title;
 
-		setName(title);
+		//setName(title);
 	}
 }
 
