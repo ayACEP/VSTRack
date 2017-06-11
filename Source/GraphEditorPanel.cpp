@@ -1125,7 +1125,7 @@ GraphDocumentComponent::GraphDocumentComponent (AudioPluginFormatManager& format
 
     graphPlayer.setProcessor (&graph->getGraph());
 
-    keyState.addListener (&graphPlayer.getMidiMessageCollector());
+    //keyState.addListener (&graphPlayer.getMidiMessageCollector());
 
     //addAndMakeVisible (keyboardComp = new MidiKeyboardComponent (keyState,
     //                                                             MidiKeyboardComponent::horizontalKeyboard));
@@ -1142,7 +1142,7 @@ GraphDocumentComponent::~GraphDocumentComponent()
 {
     releaseGraph();
 
-    keyState.removeListener (&graphPlayer.getMidiMessageCollector());
+    //keyState.removeListener (&graphPlayer.getMidiMessageCollector());
 }
 
 void GraphDocumentComponent::resized()

@@ -42,8 +42,8 @@ VstrackAudioProcessorEditor::VstrackAudioProcessorEditor (VstrackAudioProcessor&
 	graphDocumentComponent->setBounds(0, 0, getWidth(), getHeight());
 	addAndMakeVisible(graphDocumentComponent);
 
-	InternalPluginFormat internalFormat;
-	internalFormat.getAllTypes(internalTypes);
+	//InternalPluginFormat internalFormat;
+	//internalFormat.getAllTypes(internalTypes);
 
 	ScopedPointer<XmlElement> savedPluginList(appProperties->getUserSettings()->getXmlValue("pluginList"));
 
@@ -106,14 +106,14 @@ void VstrackAudioProcessorEditor::resized()
 
 StringArray MenuBar::getMenuBarNames()
 {
-	return { "File", "Plugins", "Options", "Windows" };
+	return {/* "File",*/ "Plugins", "Options"/*, "Windows"*/ };
 }
 
 PopupMenu MenuBar::getMenuForIndex(int topLevelMenuIndex, const String& menuName)
 {
 	PopupMenu menu;
 
-	if (topLevelMenuIndex == 0)
+	if (menuName == "File")
 	{
 		// "File" menu
 		menu.addCommandItem(&editor->commandManager, CommandIDs::newFile);
@@ -132,7 +132,7 @@ PopupMenu MenuBar::getMenuForIndex(int topLevelMenuIndex, const String& menuName
 		menu.addSeparator();
 		menu.addCommandItem(&editor->commandManager, StandardApplicationCommandIDs::quit);
 	}
-	else if (topLevelMenuIndex == 1)
+	else if (menuName == "Plugins")
 	{
 		// "Plugins" menu
 		PopupMenu pluginsMenu;
@@ -141,7 +141,7 @@ PopupMenu MenuBar::getMenuForIndex(int topLevelMenuIndex, const String& menuName
 		menu.addSeparator();
 		menu.addItem(250, "Delete all plugins");
 	}
-	else if (topLevelMenuIndex == 2)
+	else if (menuName == "Options")
 	{
 		// "Options" menu
 
@@ -155,14 +155,14 @@ PopupMenu MenuBar::getMenuForIndex(int topLevelMenuIndex, const String& menuName
 		sortTypeMenu.addItem(204, "List plugins based on the directory structure", true, editor->pluginSortMethod == KnownPluginList::sortByFileSystemLocation);
 		menu.addSubMenu("Plugin menu type", sortTypeMenu);
 
-		menu.addSeparator();
-		menu.addCommandItem(&editor->commandManager, CommandIDs::showAudioSettings);
-		menu.addCommandItem(&editor->commandManager, CommandIDs::toggleDoublePrecision);
+		//menu.addSeparator();
+		//menu.addCommandItem(&editor->commandManager, CommandIDs::showAudioSettings);
+		//menu.addCommandItem(&editor->commandManager, CommandIDs::toggleDoublePrecision);
 
-		menu.addSeparator();
-		menu.addCommandItem(&editor->commandManager, CommandIDs::aboutBox);
+		//menu.addSeparator();
+		//menu.addCommandItem(&editor->commandManager, CommandIDs::aboutBox);
 	}
-	else if (topLevelMenuIndex == 3)
+	else if (menuName == "Windows")
 	{
 		menu.addCommandItem(&editor->commandManager, CommandIDs::allWindowsForward);
 	}

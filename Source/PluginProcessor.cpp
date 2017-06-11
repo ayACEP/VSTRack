@@ -25,10 +25,13 @@ VstrackAudioProcessor::VstrackAudioProcessor()
                        )
 #endif
 {
+    player.setProcessor(&graph);
 }
 
 VstrackAudioProcessor::~VstrackAudioProcessor()
 {
+    player.setProcessor(nullptr);
+    graph.releaseResources();
 }
 
 //==============================================================================
@@ -87,6 +90,7 @@ void VstrackAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void VstrackAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    graph.prepareToPlay(sampleRate, samplesPerBlock);
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 }
@@ -123,8 +127,8 @@ bool VstrackAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void VstrackAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    const int totalNumInputChannels  = getTotalNumInputChannels();
-    const int totalNumOutputChannels = getTotalNumOutputChannels();
+    //const int totalNumInputChannels  = getTotalNumInputChannels();
+    //const int totalNumOutputChannels = getTotalNumOutputChannels();
 
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
@@ -132,15 +136,16 @@ void VstrackAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer&
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
-    for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
+    //for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
+    //    buffer.clear (i, 0, buffer.getNumSamples());
 
 
+    graph.processBlock(buffer, midiMessages);
 
-	//graph.processBlock(buffer, midiMessages);
-    for (int i = 0; i < graph.getNumNodes(); i++) {
-        auto processor = graph.getNode(i)->getProcessor();
-        processor->processBlock(buffer, midiMessages);
+    //for (int i = 0; i < graph.getNumNodes(); i++) {
+    //    auto node = graph.getNode(i);
+    //    auto processor = graph.getNode(i)->getProcessor();
+    //    processor->processBlock(buffer, midiMessages);
         //for (int channel = 0; channel < totalNumInputChannels; ++channel) {
         //    float* inData = const_cast<float*>(buffer.getReadPointer(channel));
         //    float* outData = buffer.getWritePointer (channel);
@@ -148,7 +153,7 @@ void VstrackAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer&
         //        //inData[j] = outData[j];
         //    }
         //}
-    }
+    //}
 
 
     // This is the place where you'd normally do the guts of your plugin's

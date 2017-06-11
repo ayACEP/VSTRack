@@ -60,6 +60,7 @@ public:
 
 private:
     MixAudioProcessorGraph graph;
+    AudioProcessorPlayer player;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VstrackAudioProcessor)
 };
